@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Title</title>
+</head>
+
+<body>
+	<th:block layout:fragment="content">
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">List of users</h1>
+		</div>
+
+		<div class="row ">
+			<div class="card shadow   col-md-12">
+				<div class="card-header  ">
+					<h6 class="m-0 font-weight-bold text-primary">List of tasks</h6>
+				</div>
+				<div class="card-body ">
+					<div class="table-responsive ">
+						<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Full name</th>
+									<th>Email</th>
+									<th>Active</th>
+									<th>Role</th>
+									<th style="width:45px">Actions</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="user: ${users}">
+									<td th:text="${user.fullName}"></td>
+<!-- 									<td th:text="${#dates.format(user.createdDate, 'dd/MM/yyyy')}"></td> -->
+									<td th:text="${user.email}"></td>
+									<td th:text="${user.active}"></td>
+									<td th:text="${user.role?.code}"></td>
+									<td><a th:href="@{/edit-user?idUser=}+${user.id}" class="fas fa-edit" title="edit"></a> <a class="fas fa-trash "
+										th:attr="data-target='#modal-delete'+${user.id}" data-rel="tooltip" title="delete" data-toggle="modal"></a> <a
+										th:href="@{/detail-user?idUser=}+${user.id}" class="fas fa-list" title="detail"></a>
+
+										<div th:id="modal-delete+${user.id}" class="modal fade" tabindex="-1">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header no-padding">
+														<div class="table-header">delete user</div>
+													</div>
+													<div class="modal-body no-padding">are you sure to delete this user</div>
+													<div class="modal-footer no-margin-top">
+														<button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+															<i class="ace-icon fa fa-times"></i> Close
+														</button>
+														<a class="btn btn-sm btn-danger pull-right" th:href="@{/delete-user?idUser=}+${user.id}"> <i
+															class="ace-icon fa fa-times">delete</i>
+														</a>
+													</div>
+												</div>
+											</div>
+										</div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</th:block>
+</body>
+
+</html>
+
+
+
+
+

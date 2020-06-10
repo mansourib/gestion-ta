@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Title</title>
+</head>
+
+<body>
+	<th:block layout:fragment="content">
+		<!-- Page Heading -->
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Detail of user</h1>
+		</div>
+		<div class="col-lg-12">
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary" th:text="${session.userDB.fullName}"></h6>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body" >
+				  Name: <h3 th:text="${session.userDB.fullName}"></h3>
+				  Email:<h3 th:text="${session.userDB.email}"></h3>
+				  Role:<h3 th:text="${session.userDB.role?.code}"></h3>
+				</div>
+			</div>
+		</div>
+		
+		<a  class="btn btn-primary" th:href="@{/update-password}">Update Password</a>
+
+
+	</th:block>
+</body>
